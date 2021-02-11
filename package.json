@@ -1,0 +1,31 @@
+{
+  "name": "tiendas-api-rest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.html",
+  "scripts": {
+    "start": "parcel serve $npm_package_main -d dist",
+    "build": "parcel build $npm_packafe_main -d build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/florcf/tiendas-api-rest.git"
+  },
+  "keywords": [
+    "html5",
+    "css3",
+    "javascript",
+    "parcel",
+    "eslint",
+    "gulp"
+  ],
+  "author": "Florencia Del Castillo Fleitas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/florcf/tiendas-api-rest/issues"
+  },
+  "homepage": "https://github.com/florcf/tiendas-api-rest#readme",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
+  }
+}
