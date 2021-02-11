@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/florcf/tiendas-api-rest#readme",
   "devDependencies": {
+    "gulp": "^4.0.2",
     "parcel-bundler": "^1.12.4"
   }
 }
