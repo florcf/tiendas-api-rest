@@ -1,12 +1,12 @@
 const xhrButton = document.querySelector('#xhr');
 xhrButton.addEventListener('click', () => {
-    xmlHttpRequest();
+    xhrGetTiendas();
 })
 
-function xmlHttpRequest() {
+function xhrGetTiendas() {
     const request = new XMLHttpRequest();
     request.responseType = 'json';
-    
+
     request.open('GET', 'http://localhost:8080/EmprInfRs_DelCastilloFlorencia/webresourcesFlor/tienda/lista-de-tiendas');
     request.send();
 
@@ -18,4 +18,16 @@ function xmlHttpRequest() {
             // request.response
         }
     });
+}
+
+const fetchButton = document.querySelector('#fetch');
+fetchButton.addEventListener('click', () => {
+    fetchGetTiendas()
+})
+
+function fetchGetTiendas() {
+    fetch('http://localhost:8080/EmprInfRs_DelCastilloFlorencia/webresourcesFlor/tienda/lista-de-tiendas', { method: 'GET' })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.log(error))
 }
