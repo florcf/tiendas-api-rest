@@ -31,3 +31,19 @@ function fetchGetTiendas() {
     .then(data => console.log(data))
     .catch(error => console.log(error))
 }
+
+const jQueryButton = document.querySelector('#jquery');
+jQueryButton.addEventListener('click', () => {
+    jQueryGetTiendas();
+})
+
+function jQueryGetTiendas() {
+    $.ajax({
+        url: 'http://localhost:8080/EmprInfRs_DelCastilloFlorencia/webresourcesFlor/tienda/lista-de-tiendas',
+        type: 'GET',
+        dataType: 'json',
+        success: function(json) {
+            console.log(json)
+        }
+    });
+}
