@@ -1,3 +1,19 @@
+import * as form from './add-tienda.js';
+
+const newTiendaBtn = document.querySelector('#new-tienda');
+newTiendaBtn.addEventListener('click', () => {
+    // Formulario para añadir tienda nueva.
+    const formElement = document.querySelector('#form > form');
+    // Alterna la clase css que hace visible el formulario.
+    formElement.classList.toggle('show-form');
+    form.addInputsEvent();
+})
+
+const addTiendaBtn = document.querySelector('#add-tienda');
+addTiendaBtn.addEventListener('click', () => {
+    form.formValidity();
+})
+
 const xhrButton = document.querySelector('#xhr');
 xhrButton.addEventListener('click', () => {
     xhrGetTiendas();
@@ -16,8 +32,7 @@ function xhrGetTiendas() {
         }
         if (request.readyState === 4 && request.status === 200) {
             // request.response
-            const tiendas = [...request.response];
-            console.log(tiendas)
+            const tiendas = request.response;
             showTiendas(tiendas);
         }
     });
@@ -31,7 +46,7 @@ fetchButton.addEventListener('click', () => {
 function fetchGetTiendas() {
     fetch('http://localhost:8080/EmprInfRs_DelCastilloFlorencia/webresourcesFlor/tienda/lista-de-tiendas', { method: 'GET' })
         .then(response => response.json())
-        .then(data => console.log(data))
+        .then(data => showTiendas(data))
         .catch(error => console.log(error))
 }
 
@@ -46,7 +61,7 @@ function jQueryGetTiendas() {
         type: 'GET',
         dataType: 'json',
         success: function (json) {
-            console.log(json)
+            showTiendas(json)
         }
     });
 }

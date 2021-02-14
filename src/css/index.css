@@ -1,0 +1,28 @@
+form {
+    display: none;
+}
+
+.show-form {
+    display: block;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+}
+
+.valid-input, .invalid-input {
+    border-radius: 3px;
+    outline: none;
+}
+
+.valid-input {
+    border: solid 1px green;
+}
+
+.invalid-input {
+    border: solid 1px red;
+}
+
+.error-message {
+    color: red;
+}
