@@ -1,31 +1,29 @@
 import * as request from './list-tiendas.js';
 
-
 /** @type {String} */
 /** Tipo de petición seleccionada por el usuario. */
-let requestType = '';
+// let requestType = '';
 
 /** @type {HTMLButtonElement} */
 const xhrButton = document.querySelector('#xhr');
 xhrButton.addEventListener('click', () => {
-    requestType = 'xhr';
+    // requestType = 'xhr';
     request.xhrGetTiendas();
-})
+});
 
 /** @type {HTMLButtonElement} */
 const fetchButton = document.querySelector('#fetch');
 fetchButton.addEventListener('click', () => {
-    requestType = 'fetch';
-    request.fetchGetTiendas()
-})
+    // requestType = 'fetch';
+    request.fetchGetTiendas();
+});
 
 /** @type {HTMLButtonElement} */
 const jQueryButton = document.querySelector('#jquery');
 jQueryButton.addEventListener('click', () => {
-    requestType = 'jquery';
+    // requestType = 'jquery';
     request.jQueryGetTiendas();
-})
-
+});
 
 /**
  * Formulario Nueva Tienda
@@ -39,13 +37,13 @@ newTiendaBtn.addEventListener('click', () => {
     // Alterna la clase css que hace visible el formulario.
     form.classList.toggle('show-form');
     addInputsEvent();
-})
+});
 
 /** @type {HTMLInputElement} */
 const addTiendaBtn = document.querySelector('#add-tienda');
 addTiendaBtn.addEventListener('click', () => {
     formValidity();
-})
+});
 
 /**
  * Array de inputs de tipo texto del formulario
@@ -63,11 +61,11 @@ formTextInputs.pop();
  * uno de los inputs del formulario.
  * @author Florencia Del Castillo Fleitas
  */
-function addInputsEvent() {
+function addInputsEvent () {
     formTextInputs.forEach(input => {
         input.addEventListener('input', () => {
             checkInput(input);
-        })
+        });
     });
 }
 
@@ -78,7 +76,7 @@ function addInputsEvent() {
  * checkInput para todos ellos.
  * @author Florencia Del Castillo Fleitas
  */
-function formValidity() {
+function formValidity () {
     if (!form.checkValidity()) {
         formTextInputs.forEach(input => {
             checkInput(input);
@@ -93,9 +91,9 @@ function formValidity() {
  * Muestra mensajes de error y añade o elimina
  * las clases css necesarias.
  * @author Florencia Del Castillo Fleitas
- * @param {*} element
+ * @param {HTMLInputElement} element
  */
-function checkInput(element) {
+function checkInput (element) {
     const validity = element.validity;
     const errorElement = element.nextElementSibling;
     if (validity.valueMissing) {
@@ -115,10 +113,10 @@ function checkInput(element) {
  * @description Crea un elemento de tipo span y un nodo
  * texto con un mensaje de error, y lo añade al DOM.
  * @author Florencia Del Castillo Fleitas
- * @param {*} element
+ * @param {HTMLDivElement} element
  * @param {string} [text='Campo obligatorio.']
  */
-function showMessage(element, text = 'Campo obligatorio.') {
+function showMessage (element, text = 'Campo obligatorio.') {
     removeMessage(element);
     const spanElement = document.createElement('span');
     const message = document.createTextNode(text);
@@ -130,9 +128,9 @@ function showMessage(element, text = 'Campo obligatorio.') {
  * @description Elimina el elemento que muestra el
  * mensaje de error de un input.
  * @author Florencia Del Castillo Fleitas
- * @param {*} element
+ * @param {HTMLDivElement} element
  */
-function removeMessage(element) {
+function removeMessage (element) {
     if (element.hasChildNodes()) {
         const children = [...element.children];
         children.forEach(child => {
