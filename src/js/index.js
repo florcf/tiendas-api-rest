@@ -1,89 +1,138 @@
-import * as form from './add-tienda.js';
+import * as request from './list-tiendas.js';
 
-const newTiendaBtn = document.querySelector('#new-tienda');
-newTiendaBtn.addEventListener('click', () => {
-    // Formulario para añadir tienda nueva.
-    const formElement = document.querySelector('#form > form');
-    // Alterna la clase css que hace visible el formulario.
-    formElement.classList.toggle('show-form');
-    form.addInputsEvent();
-})
 
-const addTiendaBtn = document.querySelector('#add-tienda');
-addTiendaBtn.addEventListener('click', () => {
-    form.formValidity();
-})
+/** @type {String} */
+/** Tipo de petición seleccionada por el usuario. */
+let requestType = '';
 
+/** @type {HTMLButtonElement} */
 const xhrButton = document.querySelector('#xhr');
 xhrButton.addEventListener('click', () => {
-    xhrGetTiendas();
+    requestType = 'xhr';
+    request.xhrGetTiendas();
 })
 
-function xhrGetTiendas() {
-    const request = new XMLHttpRequest();
-    request.responseType = 'json';
-
-    request.open('GET', 'http://localhost:8080/EmprInfRs_DelCastilloFlorencia/webresourcesFlor/tienda/lista-de-tiendas');
-    request.send();
-
-    request.addEventListener("readystatechange", () => {
-        if (request.readyState >= 1 && request.readyState <= 3) {
-            // Spinner
-        }
-        if (request.readyState === 4 && request.status === 200) {
-            // request.response
-            const tiendas = request.response;
-            showTiendas(tiendas);
-        }
-    });
-}
-
+/** @type {HTMLButtonElement} */
 const fetchButton = document.querySelector('#fetch');
 fetchButton.addEventListener('click', () => {
-    fetchGetTiendas()
+    requestType = 'fetch';
+    request.fetchGetTiendas()
 })
 
-function fetchGetTiendas() {
-    fetch('http://localhost:8080/EmprInfRs_DelCastilloFlorencia/webresourcesFlor/tienda/lista-de-tiendas', { method: 'GET' })
-        .then(response => response.json())
-        .then(data => showTiendas(data))
-        .catch(error => console.log(error))
-}
-
+/** @type {HTMLButtonElement} */
 const jQueryButton = document.querySelector('#jquery');
 jQueryButton.addEventListener('click', () => {
-    jQueryGetTiendas();
+    requestType = 'jquery';
+    request.jQueryGetTiendas();
 })
 
-function jQueryGetTiendas() {
-    $.ajax({
-        url: 'http://localhost:8080/EmprInfRs_DelCastilloFlorencia/webresourcesFlor/tienda/lista-de-tiendas',
-        type: 'GET',
-        dataType: 'json',
-        success: function (json) {
-            showTiendas(json)
-        }
+
+/**
+ * Formulario Nueva Tienda
+ */
+/** @type {HTMLFormElement} */
+const form = document.forms[0];
+
+/** @type {HTMLButtonElement} */
+const newTiendaBtn = document.querySelector('#new-tienda');
+newTiendaBtn.addEventListener('click', () => {
+    // Alterna la clase css que hace visible el formulario.
+    form.classList.toggle('show-form');
+    addInputsEvent();
+})
+
+/** @type {HTMLInputElement} */
+const addTiendaBtn = document.querySelector('#add-tienda');
+addTiendaBtn.addEventListener('click', () => {
+    formValidity();
+})
+
+/**
+ * Array de inputs de tipo texto del formulario
+ * para añadir una tienda nueva.
+ */
+const formTextInputs = [...document.forms[0]];
+/**
+ * Elimina el último elemento del array,
+ * el botón de enviar.
+ */
+formTextInputs.pop();
+
+/**
+ * @description Añade el evento de tipo input a cada
+ * uno de los inputs del formulario.
+ * @author Florencia Del Castillo Fleitas
+ */
+function addInputsEvent() {
+    formTextInputs.forEach(input => {
+        input.addEventListener('input', () => {
+            checkInput(input);
+        })
     });
 }
 
-function showTiendas(tiendas) {
-    const tiendaTemplate = document.querySelector('#tienda-template');
-    const tiendasElement = document.querySelector('#tiendas');
-    removeHtmlElements('#tiendas');
-    tiendas.forEach(tienda => {
-        const nameElement = tiendaTemplate.content.querySelector('h2');
-        nameElement.textContent = tienda.nombreTienda;
-        const addressElement = tiendaTemplate.content.querySelector('p');
-        addressElement.textContent = `${tienda.direccion} (${tienda.localidad})`;
-        const phoneElement = tiendaTemplate.content.querySelector('p:last-child');
-        phoneElement.textContent = tienda.telefono;
-        const cloneTiendaTemplate = document.importNode(tiendaTemplate.content, true);
-        tiendasElement.appendChild(cloneTiendaTemplate);
-    });
+/**
+ * @description Verifica si el formulario cumple
+ * con todas las validaciones. Si algún input no cumple
+ * todas las validaciones, se vuelve a llamar a la función
+ * checkInput para todos ellos.
+ * @author Florencia Del Castillo Fleitas
+ */
+function formValidity() {
+    if (!form.checkValidity()) {
+        formTextInputs.forEach(input => {
+            checkInput(input);
+        });
+    } else {
+        // Método POST
+    }
 }
 
-function removeHtmlElements(selector) {
-    const element = document.querySelector(selector);
+/**
+ * @description Valida cada uno de los inputs.
+ * Muestra mensajes de error y añade o elimina
+ * las clases css necesarias.
+ * @author Florencia Del Castillo Fleitas
+ * @param {*} element
+ */
+function checkInput(element) {
+    const validity = element.validity;
+    const errorElement = element.nextElementSibling;
+    if (validity.valueMissing) {
+        showMessage(errorElement);
+        element.classList.add('invalid-input');
+    } else if (validity.patternMismatch) {
+        showMessage(errorElement, 'El teléfono debe tener 9 cifras y empezar por 6, 8 ó 9.');
+        element.classList.add('invalid-input');
+    } else {
+        removeMessage(errorElement);
+        element.classList.remove('invalid-input');
+        element.classList.add('valid-input');
+    }
+}
+
+/**
+ * @description Crea un elemento de tipo span y un nodo
+ * texto con un mensaje de error, y lo añade al DOM.
+ * @author Florencia Del Castillo Fleitas
+ * @param {*} element
+ * @param {string} [text='Campo obligatorio.']
+ */
+function showMessage(element, text = 'Campo obligatorio.') {
+    removeMessage(element);
+    const spanElement = document.createElement('span');
+    const message = document.createTextNode(text);
+    spanElement.appendChild(message);
+    element.appendChild(spanElement);
+}
+
+/**
+ * @description Elimina el elemento que muestra el
+ * mensaje de error de un input.
+ * @author Florencia Del Castillo Fleitas
+ * @param {*} element
+ */
+function removeMessage(element) {
     if (element.hasChildNodes()) {
         const children = [...element.children];
         children.forEach(child => {
