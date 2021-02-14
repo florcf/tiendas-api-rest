@@ -1,28 +1,29 @@
-import * as request from './list-tiendas.js';
+import * as list from './list-tiendas.js';
+import * as add from './add-tienda.js';
 
 /** @type {String} */
 /** Tipo de petición seleccionada por el usuario. */
-// let requestType = '';
+let requestType = '';
 
 /** @type {HTMLButtonElement} */
 const xhrButton = document.querySelector('#xhr');
 xhrButton.addEventListener('click', () => {
-    // requestType = 'xhr';
-    request.xhrGetTiendas();
+    requestType = 'xhr';
+    list.xhrGetTiendas();
 });
 
 /** @type {HTMLButtonElement} */
 const fetchButton = document.querySelector('#fetch');
 fetchButton.addEventListener('click', () => {
-    // requestType = 'fetch';
-    request.fetchGetTiendas();
+    requestType = 'fetch';
+    list.fetchGetTiendas();
 });
 
 /** @type {HTMLButtonElement} */
 const jQueryButton = document.querySelector('#jquery');
 jQueryButton.addEventListener('click', () => {
-    // requestType = 'jquery';
-    request.jQueryGetTiendas();
+    requestType = 'jquery';
+    list.jQueryGetTiendas();
 });
 
 /**
@@ -83,6 +84,19 @@ function formValidity () {
         });
     } else {
         // Método POST
+        const tienda = {
+            nombreTienda: formTextInputs[0].value,
+            direccion: formTextInputs[1].value,
+            localidad: formTextInputs[2].value,
+            telefono: formTextInputs[3].value
+        };
+        if (requestType === 'xhr') {
+            add.xhrAddTienda(tienda);
+        } else if (requestType === 'fetch') {
+            add.fetchAddTienda(tienda);
+        } else if (requestType === 'jquery') {
+            add.jQueryAddTienda(tienda);
+        }
     }
 }
 

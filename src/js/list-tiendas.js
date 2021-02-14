@@ -3,7 +3,6 @@ function xhrGetTiendas () {
     request.responseType = 'json';
 
     request.open('GET', 'http://localhost:8080/EmprInfRs_DelCastilloFlorencia/webresourcesFlor/tienda/lista-de-tiendas');
-    request.send();
 
     request.addEventListener('readystatechange', () => {
         if (request.readyState >= 1 && request.readyState <= 3) {
@@ -14,6 +13,8 @@ function xhrGetTiendas () {
             showTiendas(tiendas);
         }
     });
+
+    request.send();
 }
 
 function fetchGetTiendas () {
