@@ -1,5 +1,13 @@
 import * as list from './list-tiendas.js';
 
+/**
+ * @description Realiza una petición de tipo POST,
+ * con el objeto XMLHttpRequest para añadir una tienda.
+ * Si la respuesta es correcta, se muestra la lista
+ * actualizada.
+ * @author Florencia Del Castillo Fleitas
+ * @param {JSON} tienda
+ */
 function xhrAddTienda (tienda) {
     const request = new XMLHttpRequest();
 
@@ -19,6 +27,13 @@ function xhrAddTienda (tienda) {
     request.send(JSON.stringify(tienda));
 }
 
+/**
+ * @description Realiza una petición de tipo POST,
+ * con fetch API, para añadir una tienda. Si la respuesta
+ * es correcta, se muestra la lista actualizada.
+ * @author Florencia Del Castillo Fleitas
+ * @param {JSON} tienda
+ */
 function fetchAddTienda (tienda) {
     const options = {
         method: 'POST',
@@ -34,6 +49,14 @@ function fetchAddTienda (tienda) {
     }).catch(error => console.log(error));
 }
 
+/**
+ * @description Realiza una petición de tipo POST
+ * con jQuery Ajax para añadir una tienda. Si la
+ * respuesta es correcta, se muestra la lista
+ * actualizada.
+ * @author Florencia Del Castillo Fleitas
+ * @param {String} tienda
+ */
 function jQueryAddTienda (tienda) {
     $.ajax({
         url: 'http://localhost:8080/EmprInfRs_DelCastilloFlorencia/webresourcesFlor/tienda/crear-tienda',

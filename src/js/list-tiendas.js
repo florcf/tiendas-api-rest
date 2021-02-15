@@ -1,3 +1,10 @@
+/**
+ * @description Realiza una petición HTTP, de tipo GET,
+ * con el objeto XMLHttpRequest. Obtiene un array de
+ * objetos con todas las tiendas. Muestra las tiendas si
+ * la respuesta es positiva.
+ * @author Florencia Del Castillo Fleitas
+ */
 function xhrGetTiendas () {
     const request = new XMLHttpRequest();
     request.responseType = 'json';
@@ -17,6 +24,13 @@ function xhrGetTiendas () {
     request.send();
 }
 
+/**
+ * @description Realiza una petición HTTP, de tipo GET,
+ * con Fetch API. Obtiene un array de objetos con todas
+ * las tiendas. Muestra las tiendas si la respuesta es
+ * positiva.
+ * @author Florencia Del Castillo Fleitas
+ */
 function fetchGetTiendas () {
     fetch('http://localhost:8080/EmprInfRs_DelCastilloFlorencia/webresourcesFlor/tienda/lista-de-tiendas', { method: 'GET' })
         .then(response => response.json())
@@ -24,6 +38,13 @@ function fetchGetTiendas () {
         .catch(error => console.log(error));
 }
 
+/**
+ * @description Realiza una petición HTTP, de tipo GET,
+ * con jQuery Ajax. Obtiene un array de objetos con todas
+ * las tiendas. Muestra las tiendas si la respuesta es
+ * positiva.
+ * @author Florencia Del Castillo Fleitas
+ */
 function jQueryGetTiendas () {
     $.ajax({
         url: 'http://localhost:8080/EmprInfRs_DelCastilloFlorencia/webresourcesFlor/tienda/lista-de-tiendas',
@@ -35,6 +56,12 @@ function jQueryGetTiendas () {
     });
 }
 
+/**
+ * @description Clona y renderiza un template por cada
+ * una de las tiendas para mostrar su información.
+ * @author Florencia Del Castillo Fleitas
+ * @param {Array} tiendas
+ */
 function showTiendas (tiendas) {
     const tiendaTemplate = document.querySelector('#tienda-template');
     const tiendasElement = document.querySelector('#tiendas');
@@ -51,6 +78,12 @@ function showTiendas (tiendas) {
     });
 }
 
+/**
+ * @description Elimina los hijos de un elemento
+ * si es que los tiene.
+ * @author Florencia Del Castillo Fleitas
+ * @param {String} selector
+ */
 function removeHtmlElements (selector) {
     const element = document.querySelector(selector);
     if (element.hasChildNodes()) {
@@ -64,6 +97,7 @@ function removeHtmlElements (selector) {
 export {
     xhrGetTiendas,
     fetchGetTiendas,
-    jQueryGetTiendas
+    jQueryGetTiendas,
+    showTiendas
 }
 ;

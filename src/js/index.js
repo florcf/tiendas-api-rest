@@ -1,5 +1,6 @@
 import * as list from './list-tiendas.js';
 import * as add from './add-tienda.js';
+import * as search from './search-tienda.js';
 
 /** @type {String} */
 /** Tipo de petición seleccionada por el usuario. */
@@ -152,3 +153,20 @@ function removeMessage (element) {
         });
     }
 }
+
+/**
+ * BUSCAR TIENDA
+ */
+/** @type {HTMLButtonElement} */
+const searchButton = document.querySelector('#search-btn');
+searchButton.addEventListener('click', () => {
+    /** @type {String} */
+    const id = document.querySelector('#tienda-id').value;
+    if (requestType === 'xhr') {
+        search.xhrGetTiendaById(id);
+    } else if (requestType === 'fetch') {
+        search.fetchGetTiendaById(id);
+    } else if (requestType === 'jquery') {
+        search.jQueryGetTiendaById(id);
+    }
+});
