@@ -1,3 +1,4 @@
+import { url } from './index.js';
 import * as list from './list-tiendas.js';
 
 /**
@@ -11,7 +12,7 @@ import * as list from './list-tiendas.js';
 function xhrAddTienda (tienda) {
     const request = new XMLHttpRequest();
 
-    request.open('POST', 'http://localhost:8080/EmprInfRs_DelCastilloFlorencia/webresourcesFlor/tienda/crear-tienda');
+    request.open('POST', url);
 
     request.setRequestHeader('Content-Type', 'application/json');
 
@@ -21,6 +22,9 @@ function xhrAddTienda (tienda) {
         }
         if (request.readyState === 4 && request.status === 204) {
             list.xhrGetTiendas();
+        }
+        if (request.readyState === 4 && request.status !== 204) {
+            list.showErrorMessage('No se ha podido añadir la tienda.');
         }
     });
 
@@ -42,11 +46,13 @@ function fetchAddTienda (tienda) {
         },
         body: JSON.stringify(tienda)
     };
-    fetch('http://localhost:8080/EmprInfRs_DelCastilloFlorencia/webresourcesFlor/tienda/crear-tienda', options).then(response => response.status).then(data => {
+    fetch(url, options).then(response => response.status).then(data => {
         if (data === 204) {
             list.fetchGetTiendas();
         }
-    }).catch(error => console.log(error));
+    }).catch(() => {
+        list.showErrorMessage('No se ha podido añadir la tienda.');
+    });
 }
 
 /**
@@ -59,13 +65,18 @@ function fetchAddTienda (tienda) {
  */
 function jQueryAddTienda (tienda) {
     $.ajax({
-        url: 'http://localhost:8080/EmprInfRs_DelCastilloFlorencia/webresourcesFlor/tienda/crear-tienda',
+        url: url,
         type: 'POST',
         data: JSON.stringify(tienda),
-        // dataType: 'json',
         contentType: 'application/json; charset=UTF-8',
+        beforeSend () {
+            // Spinner
+        },
         success: function () {
             list.jQueryGetTiendas();
+        },
+        error: function () {
+            list.showErrorMessage('No se ha podido añadir la tienda.');
         }
     });
 }

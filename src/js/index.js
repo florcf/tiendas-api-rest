@@ -2,6 +2,8 @@ import * as list from './list-tiendas.js';
 import * as add from './add-tienda.js';
 import * as search from './search-tienda.js';
 
+export const url = 'https://webapp-210130211157.azurewebsites.net/webresources/mitienda/';
+
 /** @type {String} */
 /** Tipo de petición seleccionada por el usuario. */
 let requestType = '';
@@ -161,12 +163,16 @@ function removeMessage (element) {
 const searchButton = document.querySelector('#search-btn');
 searchButton.addEventListener('click', () => {
     /** @type {String} */
-    const id = document.querySelector('#tienda-id').value;
-    if (requestType === 'xhr') {
-        search.xhrGetTiendaById(id);
-    } else if (requestType === 'fetch') {
-        search.fetchGetTiendaById(id);
-    } else if (requestType === 'jquery') {
-        search.jQueryGetTiendaById(id);
+    const id = document.querySelector('#tienda-id').value.trim();
+    if (id.length !== 0) {
+        if (requestType === 'xhr') {
+            search.xhrGetTiendaById(id);
+        } else if (requestType === 'fetch') {
+            search.fetchGetTiendaById(id);
+        } else if (requestType === 'jquery') {
+            search.jQueryGetTiendaById(id);
+        }
+    } else {
+        list.showErrorMessage('Tienda no encontrada.');
     }
 });

@@ -1,4 +1,5 @@
-import { showTiendas } from './list-tiendas.js';
+import { url } from './index.js';
+import { showTiendas, showErrorMessage } from './list-tiendas.js';
 
 /**
  * @description Realiza una petición HTTP, de tipo GET,
@@ -12,7 +13,7 @@ function xhrGetTiendaById (id) {
     const request = new XMLHttpRequest();
     request.responseType = 'json';
 
-    request.open('GET', `http://localhost:8080/EmprInfRs_DelCastilloFlorencia/webresourcesFlor/tienda/${id}`);
+    request.open('GET', `${url}${id}`);
 
     request.addEventListener('readystatechange', () => {
         if (request.readyState >= 1 && request.readyState <= 3) {
@@ -21,6 +22,9 @@ function xhrGetTiendaById (id) {
         if (request.readyState === 4 && request.status === 200) {
             const tienda = request.response;
             showTiendas([tienda]);
+        }
+        if (request.readyState === 4 && request.status !== 200) {
+            showErrorMessage('Tienda no encontrada.');
         }
     });
 
@@ -36,10 +40,19 @@ function xhrGetTiendaById (id) {
  * @param {String} id
  */
 function fetchGetTiendaById (id) {
-    fetch(`http://localhost:8080/EmprInfRs_DelCastilloFlorencia/webresourcesFlor/tienda/${id}`, { method: 'GET' })
-        .then(response => response.json())
-        .then(data => showTiendas([data]))
-        .catch(error => console.log(error));
+    // Spinner
+    fetch(`${url}${id}`, { method: 'GET' })
+        .then(response => response.text())
+        .then(data => {
+            if (data.length > 0) {
+                showTiendas([JSON.parse(data)]);
+            } else {
+                showErrorMessage('Tienda no encontrada.');
+            }
+        })
+        .catch(() => {
+            showErrorMessage('Tienda no encontrada.');
+        });
 }
 
 /**
@@ -52,11 +65,21 @@ function fetchGetTiendaById (id) {
  */
 function jQueryGetTiendaById (id) {
     $.ajax({
-        url: `http://localhost:8080/EmprInfRs_DelCastilloFlorencia/webresourcesFlor/tienda/${id}`,
+        url: `${url}${id}`,
         type: 'GET',
         dataType: 'json',
+        beforeSend () {
+            // Spinner
+        },
         success: function (json) {
-            showTiendas([json]);
+            if (json !== undefined) {
+                showTiendas([json]);
+            } else {
+                showErrorMessage('Tienda no encontrada.');
+            }
+        },
+        error: function () {
+            showErrorMessage('Tienda no encontrada.');
         }
     });
 }

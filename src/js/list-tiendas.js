@@ -1,3 +1,5 @@
+import { url } from './index.js';
+
 /**
  * @description Realiza una petición HTTP, de tipo GET,
  * con el objeto XMLHttpRequest. Obtiene un array de
@@ -9,7 +11,7 @@ function xhrGetTiendas () {
     const request = new XMLHttpRequest();
     request.responseType = 'json';
 
-    request.open('GET', 'http://localhost:8080/EmprInfRs_DelCastilloFlorencia/webresourcesFlor/tienda/lista-de-tiendas');
+    request.open('GET', url);
 
     request.addEventListener('readystatechange', () => {
         if (request.readyState >= 1 && request.readyState <= 3) {
@@ -18,6 +20,10 @@ function xhrGetTiendas () {
         if (request.readyState === 4 && request.status === 200) {
             const tiendas = request.response;
             showTiendas(tiendas);
+        }
+        if (request.readyState === 4 && request.status !== 200) {
+            // No se ha podido obtener la lista de tiendas.
+            showErrorMessage();
         }
     });
 
@@ -32,10 +38,13 @@ function xhrGetTiendas () {
  * @author Florencia Del Castillo Fleitas
  */
 function fetchGetTiendas () {
-    fetch('http://localhost:8080/EmprInfRs_DelCastilloFlorencia/webresourcesFlor/tienda/lista-de-tiendas', { method: 'GET' })
+    // Spinner
+    fetch(url, { method: 'GET' })
         .then(response => response.json())
         .then(data => showTiendas(data))
-        .catch(error => console.log(error));
+        .catch(() => {
+            showErrorMessage();
+        });
 }
 
 /**
@@ -47,11 +56,17 @@ function fetchGetTiendas () {
  */
 function jQueryGetTiendas () {
     $.ajax({
-        url: 'http://localhost:8080/EmprInfRs_DelCastilloFlorencia/webresourcesFlor/tienda/lista-de-tiendas',
+        url: url,
         type: 'GET',
         dataType: 'json',
+        beforeSend () {
+            // Spinner
+        },
         success: function (json) {
             showTiendas(json);
+        },
+        error: function () {
+            showErrorMessage();
         }
     });
 }
@@ -94,10 +109,26 @@ function removeHtmlElements (selector) {
     }
 }
 
+/**
+ * @description Crea un elemento HTML y un nodo texto
+ * para mostrar un mensaje de error.
+ * @author Florencia Del Castillo Fleitas
+ * @param {string} [message='Lo sentimos, ha ocurrido un error.']
+ */
+function showErrorMessage (message = 'Lo sentimos, ha ocurrido un error.') {
+    removeHtmlElements('#tiendas');
+    const tiendasElement = document.querySelector('#tiendas');
+    const hElement = document.createElement('h2');
+    const text = document.createTextNode(message);
+    hElement.appendChild(text);
+    tiendasElement.appendChild(hElement);
+}
+
 export {
     xhrGetTiendas,
     fetchGetTiendas,
     jQueryGetTiendas,
-    showTiendas
+    showTiendas,
+    showErrorMessage
 }
 ;
