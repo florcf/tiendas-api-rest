@@ -16,7 +16,7 @@ gulp.task('eslint', () => {
         .pipe(eslint.failAfterError());
 });
 
-gulp.task('doc', cb => {
+gulp.task('jsdoc', cb => {
     gulp.src(['README.md', './src/**/*.js'], { read: false })
         .pipe(jsdoc(cb));
 });
