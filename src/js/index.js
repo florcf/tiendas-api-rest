@@ -162,17 +162,41 @@ function removeMessage (element) {
 /** @type {HTMLButtonElement} */
 const searchButton = document.querySelector('#search-btn');
 searchButton.addEventListener('click', () => {
-    /** @type {String} */
-    const id = document.querySelector('#tienda-id').value.trim();
-    if (id.length !== 0) {
-        if (requestType === 'xhr') {
-            search.xhrGetTiendaById(id);
-        } else if (requestType === 'fetch') {
-            search.fetchGetTiendaById(id);
-        } else if (requestType === 'jquery') {
-            search.jQueryGetTiendaById(id);
-        }
+    if (searchButton.firstElementChild.className === 'fas fa-search') {
+        /** @type {String} */
+        const id = document.querySelector('#tienda-id').value.trim();
+        if (id.length !== 0) {
+            if (requestType === 'xhr') {
+                search.xhrGetTiendaById(id);
+            } else if (requestType === 'fetch') {
+                search.fetchGetTiendaById(id);
+            } else if (requestType === 'jquery') {
+                search.jQueryGetTiendaById(id);
+            }
+        } /* else {
+            list.showErrorMessage('Tienda no encontrada.');
+            searchButton.firstElementChild.className = 'fas fa-search';
+        } */
     } else {
-        list.showErrorMessage('Tienda no encontrada.');
+        removeSearchResult();
     }
 });
+
+/**
+ * @description Devuelve el input y el botón de búsqueda
+ * a su estado inicial y muestra la lista de tiendas
+ * según la elección del usuario.
+ * @author Florencia Del Castillo Fleitas
+ */
+function removeSearchResult () {
+    const idInput = document.querySelector('#tienda-id');
+    idInput.value = '';
+    searchButton.firstElementChild.className = 'fas fa-search';
+    if (requestType === 'xhr') {
+        list.xhrGetTiendas();
+    } else if (requestType === 'fetch') {
+        list.fetchGetTiendas();
+    } else if (requestType === 'jquery') {
+        list.jQueryGetTiendas();
+    }
+}

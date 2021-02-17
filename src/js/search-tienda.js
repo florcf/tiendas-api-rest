@@ -13,11 +13,11 @@ function xhrGetTiendaById (id) {
     const request = new XMLHttpRequest();
     request.responseType = 'json';
 
-    request.open('GET', `${url}${id}`);
-
     request.addEventListener('readystatechange', () => {
         if (request.readyState >= 1 && request.readyState <= 3) {
-            // Spinner
+            searchButtonFeedBack();
+        } else {
+            searchButtonFeedBack('fas fa-times');
         }
         if (request.readyState === 4 && request.status === 200) {
             const tienda = request.response;
@@ -28,6 +28,7 @@ function xhrGetTiendaById (id) {
         }
     });
 
+    request.open('GET', `${url}${id}`);
     request.send();
 }
 
@@ -40,7 +41,7 @@ function xhrGetTiendaById (id) {
  * @param {String} id
  */
 function fetchGetTiendaById (id) {
-    // Spinner
+    searchButtonFeedBack();
     fetch(`${url}${id}`, { method: 'GET' })
         .then(response => response.text())
         .then(data => {
@@ -49,9 +50,11 @@ function fetchGetTiendaById (id) {
             } else {
                 showErrorMessage('Tienda no encontrada.');
             }
+            searchButtonFeedBack('fas fa-times');
         })
         .catch(() => {
             showErrorMessage('Tienda no encontrada.');
+            searchButtonFeedBack('fas fa-times');
         });
 }
 
@@ -69,7 +72,7 @@ function jQueryGetTiendaById (id) {
         type: 'GET',
         dataType: 'json',
         beforeSend () {
-            // Spinner
+            searchButtonFeedBack();
         },
         success: function (json) {
             if (json !== undefined) {
@@ -80,8 +83,22 @@ function jQueryGetTiendaById (id) {
         },
         error: function () {
             showErrorMessage('Tienda no encontrada.');
+        },
+        complete: function () {
+            searchButtonFeedBack('fas fa-times');
         }
     });
+}
+
+/**
+ * @description Cambia el icono del botón
+ * de búsqueda.
+ * @author Florencia Del Castillo Fleitas
+ * @param {string} [icon='fas fa-circle-notch fa-spin']
+ */
+function searchButtonFeedBack (icon = 'fas fa-circle-notch fa-spin') {
+    const searchBtnIcon = document.querySelector('#search-btn > i');
+    searchBtnIcon.className = icon;
 }
 
 export {

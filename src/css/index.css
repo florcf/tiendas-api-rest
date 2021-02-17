@@ -1,4 +1,4 @@
-form {
+form, .hide-spinner {
     display: none;
 }
 
@@ -25,4 +25,43 @@ input:focus, select:focus, textarea:focus {
 
 .error-message {
     color: red;
+}
+
+/* Spinner */
+/*
+#spinner {
+    width: 40px;
+    height: 40px;  
+    position: relative;
+    margin: 100px auto;
+}
+
+.circle-c1, .circle-c2 {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #333;
+    opacity: 0.6;
+    position: absolute;
+    top: 0;
+    left: 0;    
+    animation: spinner 2.0s infinite ease-in-out;
+}
+
+.circle-c2 {
+    animation-delay: -1.0s;
+}
+
+@keyframes spinner {
+    0%, 100% { 
+      transform: scale(0.0);
+      -webkit-transform: scale(0.0);
+    } 50% { 
+      transform: scale(1.0);
+      -webkit-transform: scale(1.0);
+    }
+}
+*/
+.show-spinner {
+    display: block;
 }

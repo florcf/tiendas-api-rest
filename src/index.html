@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+        integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+        crossorigin="anonymous" />
     <link rel="stylesheet" href="./css/index.css">
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"
@@ -18,6 +22,7 @@
         <h1>Tiendas</h1>
     </header>
     <main>
+        <div id="spinner" class="hide-spinner"><i class="fas fa-circle-notch fa-spin"></i></div>
         <div>
             <button id="xhr">XHR</button>
             <button id="fetch">Fetch</button>
@@ -25,9 +30,12 @@
         </div>
         <div id="form">
             <div>
-                <button id="new-tienda">Nueva Tienda</button>
-                <input type="text" name="tienda" id="tienda-id" placeholder="ID de Tienda">
-                <button id="search-btn">Buscar</button>
+                <div>
+                    <button id="new-tienda">Nueva Tienda</button>
+                    <input type="text" name="tienda" id="tienda-id" placeholder="ID de Tienda">
+                    <button id="search-btn"><i class="fas fa-search"></i></button>
+                </div>                
+                <div id="missing-id"><span></span></div>                
             </div>
             <form action="#" novalidate>
                 <h2>Nueva Empresa</h2>
@@ -48,10 +56,11 @@
                 </div>
                 <div class="form-group">
                     <label for="phone">Teléfono</label>
-                    <input type="text" name="phone" id="phone" placeholder="Teléfono de la empresa" pattern="^[689]{1}\d{8}$" required>
+                    <input type="text" name="phone" id="phone" placeholder="Teléfono de la empresa"
+                        pattern="^[689]{1}\d{8}$" required>
                     <div class="error-message"></div>
                 </div>
-                <input type="button" id="add-tienda" value="Añadir Tienda">
+                <button type="button" id="add-tienda"><i class=""></i><span> Añadir Tienda</span></button>
             </form>
         </div>
         <div id="tiendas"></div>

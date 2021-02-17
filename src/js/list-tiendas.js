@@ -11,11 +11,12 @@ function xhrGetTiendas () {
     const request = new XMLHttpRequest();
     request.responseType = 'json';
 
-    request.open('GET', url);
-
     request.addEventListener('readystatechange', () => {
         if (request.readyState >= 1 && request.readyState <= 3) {
-            // Spinner
+            spinner(); // Muestra el spinner.
+        }
+        if (request.readyState === 4) {
+            spinner(); // Oculta el spinner.
         }
         if (request.readyState === 4 && request.status === 200) {
             const tiendas = request.response;
@@ -27,6 +28,7 @@ function xhrGetTiendas () {
         }
     });
 
+    request.open('GET', url);
     request.send();
 }
 
@@ -38,11 +40,15 @@ function xhrGetTiendas () {
  * @author Florencia Del Castillo Fleitas
  */
 function fetchGetTiendas () {
-    // Spinner
+    spinner();
     fetch(url, { method: 'GET' })
         .then(response => response.json())
-        .then(data => showTiendas(data))
+        .then(data => {
+            spinner();
+            showTiendas(data);
+        })
         .catch(() => {
+            spinner();
             showErrorMessage();
         });
 }
@@ -60,13 +66,16 @@ function jQueryGetTiendas () {
         type: 'GET',
         dataType: 'json',
         beforeSend () {
-            // Spinner
+            spinner();
         },
         success: function (json) {
             showTiendas(json);
         },
         error: function () {
             showErrorMessage();
+        },
+        complete: function () {
+            spinner();
         }
     });
 }
@@ -124,11 +133,22 @@ function showErrorMessage (message = 'Lo sentimos, ha ocurrido un error.') {
     tiendasElement.appendChild(hElement);
 }
 
+/**
+ * @description Muestra u oculta el spinner
+ * alternando la clase css .show-spinner.
+ * @author Florencia Del Castillo Fleitas
+ */
+function spinner () {
+    const spinner = document.querySelector('#spinner');
+    spinner.classList.toggle('show-spinner');
+}
+
 export {
     xhrGetTiendas,
     fetchGetTiendas,
     jQueryGetTiendas,
     showTiendas,
-    showErrorMessage
+    showErrorMessage,
+    spinner
 }
 ;

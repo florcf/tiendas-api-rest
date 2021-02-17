@@ -33,7 +33,7 @@
 			<li class="dropdown">
 				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="global.html#addInputsEvent">addInputsEvent</a></li><li><a href="global.html#addTiendaBtn">addTiendaBtn</a></li><li><a href="global.html#checkInput">checkInput</a></li><li><a href="global.html#fetchAddTienda">fetchAddTienda</a></li><li><a href="global.html#fetchButton">fetchButton</a></li><li><a href="global.html#fetchGetTiendaById">fetchGetTiendaById</a></li><li><a href="global.html#fetchGetTiendas">fetchGetTiendas</a></li><li><a href="global.html#form">form</a></li><li><a href="global.html#formTextInputs">formTextInputs</a></li><li><a href="global.html#formValidity">formValidity</a></li><li><a href="global.html#jQueryAddTienda">jQueryAddTienda</a></li><li><a href="global.html#jQueryButton">jQueryButton</a></li><li><a href="global.html#jQueryGetTiendaById">jQueryGetTiendaById</a></li><li><a href="global.html#jQueryGetTiendas">jQueryGetTiendas</a></li><li><a href="global.html#newTiendaBtn">newTiendaBtn</a></li><li><a href="global.html#removeHtmlElements">removeHtmlElements</a></li><li><a href="global.html#removeMessage">removeMessage</a></li><li><a href="global.html#requestType">requestType</a></li><li><a href="global.html#searchButton">searchButton</a></li><li><a href="global.html#showErrorMessage">showErrorMessage</a></li><li><a href="global.html#showMessage">showMessage</a></li><li><a href="global.html#showTiendas">showTiendas</a></li><li><a href="global.html#xhrAddTienda">xhrAddTienda</a></li><li><a href="global.html#xhrButton">xhrButton</a></li><li><a href="global.html#xhrGetTiendaById">xhrGetTiendaById</a></li><li><a href="global.html#xhrGetTiendas">xhrGetTiendas</a></li>
+					<li><a href="global.html#addInputsEvent">addInputsEvent</a></li><li><a href="global.html#addTiendaBtn">addTiendaBtn</a></li><li><a href="global.html#checkInput">checkInput</a></li><li><a href="global.html#fetchAddTienda">fetchAddTienda</a></li><li><a href="global.html#fetchButton">fetchButton</a></li><li><a href="global.html#fetchGetTiendaById">fetchGetTiendaById</a></li><li><a href="global.html#fetchGetTiendas">fetchGetTiendas</a></li><li><a href="global.html#form">form</a></li><li><a href="global.html#formButtonFeedback">formButtonFeedback</a></li><li><a href="global.html#formTextInputs">formTextInputs</a></li><li><a href="global.html#formValidity">formValidity</a></li><li><a href="global.html#jQueryAddTienda">jQueryAddTienda</a></li><li><a href="global.html#jQueryButton">jQueryButton</a></li><li><a href="global.html#jQueryGetTiendaById">jQueryGetTiendaById</a></li><li><a href="global.html#jQueryGetTiendas">jQueryGetTiendas</a></li><li><a href="global.html#newTiendaBtn">newTiendaBtn</a></li><li><a href="global.html#removeHtmlElements">removeHtmlElements</a></li><li><a href="global.html#removeMessage">removeMessage</a></li><li><a href="global.html#removeSearchResult">removeSearchResult</a></li><li><a href="global.html#requestType">requestType</a></li><li><a href="global.html#resetForm">resetForm</a></li><li><a href="global.html#searchButton">searchButton</a></li><li><a href="global.html#searchButtonFeedBack">searchButtonFeedBack</a></li><li><a href="global.html#showErrorMessage">showErrorMessage</a></li><li><a href="global.html#showMessage">showMessage</a></li><li><a href="global.html#showTiendas">showTiendas</a></li><li><a href="global.html#spinner">spinner</a></li><li><a href="global.html#xhrAddTienda">xhrAddTienda</a></li><li><a href="global.html#xhrButton">xhrButton</a></li><li><a href="global.html#xhrGetTiendaById">xhrGetTiendaById</a></li><li><a href="global.html#xhrGetTiendas">xhrGetTiendas</a></li>
 				</ul>
 			</li>
 			
@@ -1326,6 +1326,243 @@ positiva.</p>
             
 <hr>
 <dt>
+    <h4 class="name" id="formButtonFeedback"><span class="type-signature"></span>formButtonFeedback( [icon] [, text] [, state])</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Cambia el botón de añadir tienda
+para dar feedback al usuario mientras se realiza
+la petición.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Argument</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>icon</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    'fas fa-circle-notch fa-spin'
+                
+                </td>
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>text</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    ' Cargando...'
+                
+                </td>
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>state</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    true
+                
+                </td>
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+	<dt class="tag-author method-doc-label method-doc-details-label">Author:</dt>
+	<dd class="tag-author">
+		<ul>
+			<li>Florencia Del Castillo Fleitas</li>
+			</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
     <h4 class="name" id="formValidity"><span class="type-signature"></span>formValidity()</h4>
     
     
@@ -2050,6 +2287,335 @@ mensaje de error de un input.</p>
             
 <hr>
 <dt>
+    <h4 class="name" id="removeSearchResult"><span class="type-signature"></span>removeSearchResult()</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Devuelve el input y el botón de búsqueda
+a su estado inicial y muestra la lista de tiendas
+según la elección del usuario.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+	<dt class="tag-author method-doc-label method-doc-details-label">Author:</dt>
+	<dd class="tag-author">
+		<ul>
+			<li>Florencia Del Castillo Fleitas</li>
+			</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="resetForm"><span class="type-signature"></span>resetForm()</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Deja el formulario como en su
+estado inicial.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+	<dt class="tag-author method-doc-label method-doc-details-label">Author:</dt>
+	<dd class="tag-author">
+		<ul>
+			<li>Florencia Del Castillo Fleitas</li>
+			</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="searchButtonFeedBack"><span class="type-signature"></span>searchButtonFeedBack( [icon])</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Cambia el icono del botón
+de búsqueda.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Argument</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>icon</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    'fas fa-circle-notch fa-spin'
+                
+                </td>
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+	<dt class="tag-author method-doc-label method-doc-details-label">Author:</dt>
+	<dd class="tag-author">
+		<ul>
+			<li>Florencia Del Castillo Fleitas</li>
+			</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
     <h4 class="name" id="showErrorMessage"><span class="type-signature"></span>showErrorMessage( [message])</h4>
     
     
@@ -2534,6 +3100,92 @@ una de las tiendas para mostrar su información.</p>
             
 <hr>
 <dt>
+    <h4 class="name" id="spinner"><span class="type-signature"></span>spinner()</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Muestra u oculta el spinner
+alternando la clase css .show-spinner.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+	<dt class="tag-author method-doc-label method-doc-details-label">Author:</dt>
+	<dd class="tag-author">
+		<ul>
+			<li>Florencia Del Castillo Fleitas</li>
+			</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
     <h4 class="name" id="xhrAddTienda"><span class="type-signature"></span>xhrAddTienda(tienda)</h4>
     
     
@@ -2944,7 +3596,7 @@ la respuesta es positiva.</p>
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a>
 	
-		on February 16th 2021, 10:20:36 pm
+		on February 17th 2021, 2:47:40 am
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>
