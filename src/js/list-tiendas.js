@@ -13,6 +13,7 @@ function xhrGetTiendas () {
 
     request.addEventListener('readystatechange', () => {
         if (request.readyState >= 1 && request.readyState <= 3) {
+            hideRequestButtons();
             spinner(); // Muestra el spinner.
         }
         if (request.readyState === 4) {
@@ -21,6 +22,7 @@ function xhrGetTiendas () {
         if (request.readyState === 4 && request.status === 200) {
             const tiendas = request.response;
             showTiendas(tiendas);
+            showFormSection();
         }
         if (request.readyState === 4 && request.status !== 200) {
             // No se ha podido obtener la lista de tiendas.
@@ -40,12 +42,14 @@ function xhrGetTiendas () {
  * @author Florencia Del Castillo Fleitas
  */
 function fetchGetTiendas () {
+    hideRequestButtons();
     spinner();
     fetch(url, { method: 'GET' })
         .then(response => response.json())
         .then(data => {
             spinner();
             showTiendas(data);
+            showFormSection();
         })
         .catch(() => {
             spinner();
@@ -66,9 +70,11 @@ function jQueryGetTiendas () {
         type: 'GET',
         dataType: 'json',
         beforeSend () {
+            hideRequestButtons();
             spinner();
         },
         success: function (json) {
+            showFormSection();
             showTiendas(json);
         },
         error: function () {
@@ -78,6 +84,38 @@ function jQueryGetTiendas () {
             spinner();
         }
     });
+}
+
+/**
+ * @description Oculta la sección de los
+ * botones para seleccionar el tipo
+ * de petición.
+ * @author Florencia Del Castillo Fleitas
+ */
+function hideRequestButtons () {
+    const requestButtons = document.querySelector('#request-types-buttons');
+    requestButtons.className = 'hidden-section';
+}
+
+/**
+ * @description Muestra u oculta el spinner
+ * alternando la clase css .show-spinner.
+ * @author Florencia Del Castillo Fleitas
+ */
+function spinner () {
+    const spinner = document.querySelector('#spinner');
+    spinner.classList.toggle('show-spinner');
+}
+
+/**
+ * @description Hace visible el formulario
+ * de búsqueda de tienda por id y de
+ * añadir tienda.
+ * @author Florencia Del Castillo Fleitas
+ */
+function showFormSection () {
+    const formSection = document.querySelector('#response-section');
+    formSection.className = 'show-form';
 }
 
 /**
@@ -131,16 +169,6 @@ function showErrorMessage (message = 'Lo sentimos, ha ocurrido un error.') {
     const text = document.createTextNode(message);
     hElement.appendChild(text);
     tiendasElement.appendChild(hElement);
-}
-
-/**
- * @description Muestra u oculta el spinner
- * alternando la clase css .show-spinner.
- * @author Florencia Del Castillo Fleitas
- */
-function spinner () {
-    const spinner = document.querySelector('#spinner');
-    spinner.classList.toggle('show-spinner');
 }
 
 export {

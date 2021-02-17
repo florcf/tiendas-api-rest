@@ -1,8 +1,88 @@
-form, .hide-spinner {
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto+Mono&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
+body, input, button {
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+}
+
+header {
+    background-color: #007965;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+header > h1 {
+    font-family: 'Roboto Mono', monospace;
+    color: #ffcc29;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btn-group > button {
+    width: 10rem;
+    margin: 5px 0;
+}
+
+#response-section {
+    flex-grow: 1;
+    padding: 0 10rem;
+    height: 100%;
+}
+
+.form-pack {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-pack > div:first-child {
+    margin-right: 5px;
+}
+
+.form-pack > div:last-child {
+    margin-left: 5px;
+}
+
+#form > div:first-child {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-group {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.hidden-section, form, .hidden-spinner {
     display: none;
 }
 
-.show-form {
+.show-form, .show-spinner {
     display: block;
 }
 
@@ -27,41 +107,13 @@ input:focus, select:focus, textarea:focus {
     color: red;
 }
 
-/* Spinner */
-/*
-#spinner {
-    width: 40px;
-    height: 40px;  
-    position: relative;
-    margin: 100px auto;
+.tienda {
+    border: solid 1px #007965;
+    border-radius: 5px;
+    padding: 0 20px;
+    margin: 15px 0;
 }
 
-.circle-c1, .circle-c2 {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background-color: #333;
-    opacity: 0.6;
-    position: absolute;
-    top: 0;
-    left: 0;    
-    animation: spinner 2.0s infinite ease-in-out;
-}
-
-.circle-c2 {
-    animation-delay: -1.0s;
-}
-
-@keyframes spinner {
-    0%, 100% { 
-      transform: scale(0.0);
-      -webkit-transform: scale(0.0);
-    } 50% { 
-      transform: scale(1.0);
-      -webkit-transform: scale(1.0);
-    }
-}
-*/
-.show-spinner {
-    display: block;
+.tienda > h2 {
+    color: #007965;
 }

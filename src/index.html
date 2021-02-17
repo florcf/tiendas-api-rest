@@ -22,48 +22,62 @@
         <h1>Tiendas</h1>
     </header>
     <main>
-        <div id="spinner" class="hide-spinner"><i class="fas fa-circle-notch fa-spin"></i></div>
-        <div>
-            <button id="xhr">XHR</button>
-            <button id="fetch">Fetch</button>
-            <button id="jquery">jQuery</button>
+        <div id="request-types-buttons">
+            <h2>Elige el método para realizar AJAX</h2>
+            <div class="btn-group">
+                <button id="xhr">XHR</button>
+                <button id="fetch">Fetch</button>
+                <button id="jquery">jQuery</button>
+            </div>
         </div>
-        <div id="form">
-            <div>
+        <div id="spinner" class="hidden-spinner">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </div>
+        <div id="response-section" class="hidden-section">
+            <div id="form">
                 <div>
                     <button id="new-tienda">Nueva Tienda</button>
-                    <input type="text" name="tienda" id="tienda-id" placeholder="ID de Tienda">
-                    <button id="search-btn"><i class="fas fa-search"></i></button>
-                </div>                
-                <div id="missing-id"><span></span></div>                
+                    <div>
+                        <input type="text" name="tienda" id="tienda-id" placeholder="ID de Tienda">
+                        <button id="search-btn"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+                <form action="#" novalidate>
+                    <h2>Nueva Empresa</h2>
+                    <div>
+                        <div class="form-pack">
+                            <div class="form-group">
+                                <label for="name">Nombre</label>
+                                <input type="text" name="name" id="name" placeholder="Nombre de la empresa" required>
+                                <div class="error-message"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Dirección</label>
+                                <input type="text" name="address" id="address" placeholder="Dirección de la empresa"
+                                    required>
+                                <div class="error-message"></div>
+                            </div>
+                        </div>
+                        <div class="form-pack">
+                            <div class="form-group">
+                                <label for="location">Localidad</label>
+                                <input type="text" name="location" id="location" placeholder="Localidad de la empresa"
+                                    required>
+                                <div class="error-message"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Teléfono</label>
+                                <input type="text" name="phone" id="phone" placeholder="Teléfono de la empresa"
+                                    pattern="^[689]{1}\d{8}$" required>
+                                <div class="error-message"></div>
+                            </div>
+                        </div>       
+                    </div>
+                    <button type="button" id="add-tienda"><i class=""></i><span> Añadir Tienda</span></button>
+                </form>
             </div>
-            <form action="#" novalidate>
-                <h2>Nueva Empresa</h2>
-                <div class="form-group">
-                    <label for="name">Nombre</label>
-                    <input type="text" name="name" id="name" placeholder="Nombre de la empresa" required>
-                    <div class="error-message"></div>
-                </div>
-                <div class="form-group">
-                    <label for="address">Dirección</label>
-                    <input type="text" name="address" id="address" placeholder="Dirección de la empresa" required>
-                    <div class="error-message"></div>
-                </div>
-                <div class="form-group">
-                    <label for="location">Localidad</label>
-                    <input type="text" name="location" id="location" placeholder="Localidad de la empresa" required>
-                    <div class="error-message"></div>
-                </div>
-                <div class="form-group">
-                    <label for="phone">Teléfono</label>
-                    <input type="text" name="phone" id="phone" placeholder="Teléfono de la empresa"
-                        pattern="^[689]{1}\d{8}$" required>
-                    <div class="error-message"></div>
-                </div>
-                <button type="button" id="add-tienda"><i class=""></i><span> Añadir Tienda</span></button>
-            </form>
+            <div id="tiendas"></div>
         </div>
-        <div id="tiendas"></div>
     </main>
     <template id="tienda-template">
         <div class="tienda">
